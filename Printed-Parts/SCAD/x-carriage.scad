@@ -7,6 +7,7 @@
 
 use <bearing.scad>
 include <x-carriage-back.scad>
+include <scadlib/bearings.scad>
 
 draft = true;
 $fn = draft ? 32 : 128;
@@ -463,6 +464,6 @@ module right_belt_cut()
         translate([-5,30.3,7]) rotate([0,0,0]) cylinder(r=0.2, h=100);
     }
 
-x_carriage();
-x_carriage_back();
-
+//x_carriage();
+//x_carriage_back();
+ bushing_lm8uu_drylin() show_anchors();
