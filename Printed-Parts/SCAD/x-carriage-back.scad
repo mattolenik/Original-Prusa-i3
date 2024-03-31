@@ -21,6 +21,7 @@ module m3head()
 
 module x_carriage_back()
 {
+    translate([-1, -4, -15.1]) // Align to center around central screw head
     difference()
     {
         union()
@@ -40,8 +41,8 @@ module x_carriage_back()
         translate([-20,-19.5,9]) cube([50,7.5,10]);
 
         // bearings
-        translate([-15,-25,11.75]) rotate([0,90,0]) cylinder( h=31, r=7.6, $fn=150 );
-        translate([-30,20,11.75]) rotate([0,90,0]) cylinder( h=60, r=7.6, $fn=150 );
+        translate([-15,-25,11.75]) rotate([0,90,0]) cylinder( h=31, r=7.5, $fn=150 );
+        translate([-30,20,11.75]) rotate([0,90,0]) cylinder( h=60, r=7.5, $fn=150 );
         translate([-17,-25,11.75]) rotate([0,90,0]) cylinder( h=60, r=7, $fn=30 );
         translate([-32,20,11.75]) rotate([0,90,0]) cylinder( h=80, r=7, $fn=30 );
 
@@ -168,9 +169,7 @@ module x_carriage_back()
 
                                 // version
         translate([-12,-29,22.6]) rotate([0,0,0]) linear_extrude(height = 0.6)
-        { text("R7",font = "helvetica:style=Bold", size=4); }
+        { text("R7+",font = "helvetica:style=Bold", size=4); }
     }
 }
-
-rotate([0,180,0]) x_carriage_back();
 

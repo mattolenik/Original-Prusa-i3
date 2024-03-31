@@ -8,7 +8,8 @@
 use <bearing.scad>
 include <x-carriage-back.scad>
 
-$fn = 128;
+draft = true;
+$fn = draft ? 32 : 128;
 
 module belt_cut()
 {
@@ -312,6 +313,8 @@ module x_carriage_block()
 
 module x_carriage()
 {
+
+    translate([16, -29, -15])
     difference()
     {
             x_carriage_block();
@@ -461,7 +464,5 @@ module right_belt_cut()
     }
 
 x_carriage();
-
-
-
+x_carriage_back();
 
