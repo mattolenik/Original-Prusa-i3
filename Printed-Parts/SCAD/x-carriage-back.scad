@@ -168,9 +168,7 @@ module x_carriage_back()
 
                                 // version
         translate([-12,-29,22.6]) rotate([0,0,0]) linear_extrude(height = 0.6)
-        { text("R7",font = "helvetica:style=Bold", size=4, center=true); }
-
-
+        { text("R7",font = "helvetica:style=Bold", size=4); }
     }
 }
 
