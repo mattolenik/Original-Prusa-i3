@@ -7,6 +7,8 @@
 
 use <bearing.scad>
 
+$fn = 128;
+
 module belt_cut()
 {
     rotate([0,0,180])
@@ -78,16 +80,16 @@ module x_carriage_holes()
     translate([2,0,0])
     difference()
         {
-            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8, h=3.5, $fn=25);
-            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6, $fn=25);
+            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8, h=3.5);
+            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6);
         }
 
     // upper ziptie left
     translate([-38,0,0])
     difference()
         {
-            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8,h=3.5,$fn=25);
-            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6, $fn=25);
+            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8,h=3.5);
+            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6);
         }
 
     // upper ziptie head
@@ -95,11 +97,11 @@ module x_carriage_holes()
     translate([-45,52.5,12]) cube([13.5,10,5]);
 
     // Extruder mounting holes
-    translate([-7,15.5,-1])cylinder(r=1.65, h=20, $fn=25);
-    translate([-27,15.5,-1])cylinder(r=1.65, h=20, $fn=25);
+    translate([-7,15.5,-1])cylinder(r=1.65, h=20);
+    translate([-27,15.5,-1])cylinder(r=1.65, h=20);
 
-    translate([-7,15.5,-1])cylinder(r2=1.65, r1=2.2,h=2, $fn=25);
-    translate([-27,15.5,-1])cylinder(r2=1.65, r1=2.2,h=2, $fn=25);
+    translate([-7,15.5,-1])cylinder(r2=1.65, r1=2.2,h=2);
+    translate([-27,15.5,-1])cylinder(r2=1.65, r1=2.2,h=2);
 
     translate([-7,15.5,4])cylinder(r=3.1, h=4, $fn=6);
     translate([-27,15.5,4])cylinder(r=3.1, h=4, $fn=6);
@@ -193,7 +195,7 @@ module final_cutout()
         union()
         {
             translate([0.5,10,-1]) cube([8,18,6]);
-            translate([0.5,28,0]) rotate([0,90,0]) cylinder(r=5, h=8, $fn=25);
+            translate([0.5,28,0]) rotate([0,90,0]) cylinder(r=5, h=8);
             translate([0.5,12,0.5]) rotate([45,0,0]) cube([8,4,6]);
         }
         translate([7.8,10,8]) rotate([0,85,0]) cube([15,25,10]);
@@ -201,18 +203,20 @@ module final_cutout()
 
 
 
+    // CSG offset
+    o = 1;
     // filament hole
     difference ()
     {
         union()
         {
-        translate([-14.199,9.05,0]) rotate([-5,0,22.5]) cylinder(r=1.62, h=40, $fn=8);
-        translate([-14.5,9.7,8]) rotate([-5,0,22.5]) cylinder(r=1.62,r2=3, h=8, $fn=8);
+        translate([-14.199,9.05,-o]) rotate([-5,0,22.5]) cylinder(r=1.62, h=40+o, $fn=8);
+        translate([-14.5,9.7,8-o]) rotate([-5,0,22.5]) cylinder(r1=1.62,r2=3, h=8+o, $fn=8);
         }
     }
 
     // bottom back mounting screws
-    translate([-22,-11,4]) cylinder(r=1.65, h=20, $fn=50);
+    translate([-22,-11,4-o]) cylinder(r=1.65, h=20+o);
 
     difference()
     {
@@ -229,8 +233,8 @@ module final_cutout()
 
 
     // x-carriage-back mounting screws
-    translate([-4,56,0]) cylinder(r=1.7, h=40, $fn=50);
-    translate([-27.5,56,0]) cylinder(r=1.7, h=40, $fn=50);
+    translate([-4,56,0]) cylinder(r=1.7, h=40);
+    translate([-27.5,56,0]) cylinder(r=1.7, h=40);
     translate([-30.3,53,8]) cube([5.6,8,2]);
     translate([-6.8,53,8]) cube([5.6,8,2]);
 
@@ -243,7 +247,7 @@ module final_cutout()
 
 
     // center mounting screw
-    translate([-16,29,0]) cylinder(r=1.65, h=40, $fn=50);
+    translate([-16,29,0]) cylinder(r=1.65, h=40);
     translate([-18.8,26,10.5]) cube([5.6,12,2.1]);
     translate([-21,33,11]) cube([10,8,6]);
 
@@ -259,7 +263,7 @@ module final_cutout()
     {
         union()
         {
-        translate([-11,-12,1]) rotate([0,0,0]) cylinder(r=3, h=10, $fn=30);
+        translate([-11,-12,1]) rotate([0,0,0]) cylinder(r=3, h=10);
         translate([-11,-15,-0]) cube([3,6,10]);
         }
        translate([-8,-20,5]) rotate([0,-20,0]) cube([10,20,10]);
@@ -271,8 +275,8 @@ module final_cutout()
         rotate([0,-20,0])
         union()
         {
-        translate([-7,-12,-5]) rotate([0,0,0]) cylinder(r=3, h=30, $fn=30);
-        translate([-9,-12,-5]) rotate([0,0,0]) cylinder(r=3, h=30, $fn=30);
+        translate([-7,-12,-5]) rotate([0,0,0]) cylinder(r=3, h=30);
+        translate([-9,-12,-5]) rotate([0,0,0]) cylinder(r=3, h=30);
         translate([-12,-18,-5]) cube([8,6,30]);
         translate([-9,-15,-5]) cube([2,6,30]);
         }
@@ -281,8 +285,8 @@ module final_cutout()
     }
 
     // 2.5 endstop hole
-    translate([-8,-11,11]) rotate([0,90,0]) cylinder(r=1.4, h=10, $fn=30);
-    translate([-0.5,-11,11]) rotate([0,90,0]) cylinder(r1=1.4, r2=1.7, h=2, $fn=30);
+    translate([-8,-11,11]) rotate([0,90,0]) cylinder(r=1.4, h=10);
+    translate([-0.5,-11,11]) rotate([0,90,0]) cylinder(r1=1.4, r2=1.7, h=2);
 
 }
 
@@ -312,15 +316,15 @@ module x_carriage()
             x_carriage_block();
 
             // upper motor screw
-            translate([2.5,67.5,-50]) cylinder(r=1.8, h=100, $fn=30);
-            translate([2.5,67.5,-0.1]) cylinder(r1=2.1,r2=1.8, h=0.5, $fn=25);
-            translate([2.5,67.5,7.5]) cylinder(r=3.2, h=7, $fn=30);
+            translate([2.5,67.5,-50]) cylinder(r=1.8, h=100);
+            translate([2.5,67.5,-0.1]) cylinder(r1=2.1,r2=1.8, h=0.5);
+            translate([2.5,67.5,7.5]) cylinder(r=3.2, h=7);
 
-            translate([-28.5,67.5,7.5])cylinder(r=3.2, h=20, $fn=25);
-            translate([-28.5,67.5,-1])cylinder(r=1.65, h=20, $fn=25);
-            translate([-28.5,67.5,-1])cylinder(r2=1.65, r1=3, h=2, $fn=25);
+            translate([-28.5,67.5,7.5])cylinder(r=3.2, h=20);
+            translate([-28.5,67.5,-1])cylinder(r=1.65, h=20);
+            translate([-28.5,67.5,-1])cylinder(r2=1.65, r1=3, h=2);
 
-            translate([0.5,22.5,0]) rotate([0,90,0]) cylinder(r=5.2, h=7.0, $fn=25);
+            translate([0.5,22.5,0]) rotate([0,90,0]) cylinder(r=5.2, h=7.0);
 
 
             // selective infill
@@ -356,16 +360,16 @@ module x_carriage()
                 translate([-1.5,30,-0.8]) cube([3.5,30,4.5]);
 
                 translate([0.5,34.46,-4]) cube([4,3,4.5]);
-                translate([2,34.46,-4]) cylinder(r=1.5, h=4.5, $fn=25);
-                translate([2,34.46+3,-4]) cylinder(r=1.5, h=4.5, $fn=25);
+                translate([2,34.46,-4]) cylinder(r=1.5, h=4.5);
+                translate([2,34.46+3,-4]) cylinder(r=1.5, h=4.5);
 
                 translate([0.5,54,-4]) cube([4,3,4.5]);
-                translate([2,54,-4]) cylinder(r=1.5, h=4.5, $fn=25);
-                translate([2,57,-4]) cylinder(r=1.5, h=4.5, $fn=25);
+                translate([2,54,-4]) cylinder(r=1.5, h=4.5);
+                translate([2,57,-4]) cylinder(r=1.5, h=4.5);
 
                 translate([-4.0,44,-4]) cube([4,3,4.5]);
-                translate([-1.5,44,-4]) cylinder(r=1.5, h=4.5, $fn=25);
-                translate([-1.5,47,-4]) cylinder(r=1.5, h=4.5, $fn=25);
+                translate([-1.5,44,-4]) cylinder(r=1.5, h=4.5);
+                translate([-1.5,47,-4]) cylinder(r=1.5, h=4.5);
             }
 
             translate([-1.05,58.25,-0.8]) rotate([0,0,30]) cube([3.5,13,4.5]);
@@ -373,18 +377,18 @@ module x_carriage()
 
             translate([-9,70.5,-0.8]) rotate([45,0,0]) cube([9,6,6]);
 
-            translate([0.45,30,-0.8]) cylinder(r=2, h=4.5, $fn=25);
-            translate([-3.5,68,3]) cylinder(r=2, h=6, $fn=25);
+            translate([0.45,30,-0.8]) cylinder(r=2, h=4.5);
+            translate([-3.5,68,3]) cylinder(r=2, h=6);
             translate([-6.75,69,-0.8]) cube([4,10,10]);
 
 
 
 
             // hold together screws clearance
-            translate([-4.5,25.5,-1]) cylinder(r1=2.2,r2=1.5, h=10, $fn=25);
-            translate([-28.5,25.5,-1]) cylinder(r1=2.2,r2=1.5, h=10, $fn=25);
-            translate([-4.5,25.5,-1]) cylinder(r2=2,r1=3,h=3, $fn=25);
-            translate([-28.5,25.5,-1]) cylinder(r2=2,r1=3,h=3, $fn=25);
+            translate([-4.5,25.5,-1]) cylinder(r1=2.2,r2=1.5, h=10);
+            translate([-28.5,25.5,-1]) cylinder(r1=2.2,r2=1.5, h=10);
+            translate([-4.5,25.5,-1]) cylinder(r2=2,r1=3,h=3);
+            translate([-28.5,25.5,-1]) cylinder(r2=2,r1=3,h=3);
 
 
             translate([0,-0.5,0]) left_belt_cut();
@@ -392,7 +396,7 @@ module x_carriage()
 
                                          //version
             translate([-12,-2,0.5]) rotate([0,180,0]) linear_extrude(height = 0.6)
-            { text("R7",font = "helvetica:style=Bold", size=5, center=true); }
+            { text("R7",font = "helvetica:style=Bold", size=5); }
 
 
     }
@@ -402,7 +406,7 @@ module x_carriage()
 module left_belt_cut()
 {
 
-        translate([-22.5,30.2,7]) cylinder(r=1.5, h=100, $fn=30);
+        translate([-22.5,30.2,7]) cylinder(r=1.5, h=100);
         translate([-23.0,20,7]) cube([2,10,30]);
         translate([-56.5,28.5,7]) belt_cut();
         translate([13.5,20.5,0]) rotate([0,0,25])
@@ -422,15 +426,15 @@ module left_belt_cut()
             }
         }
         translate([-45,18,4]) rotate([0,0,-13.5]) cube([10.5,3,32]);
-        translate([-31.5,30.4,10]) rotate([-10,0,15]) cylinder(r=0.2, h=100, $fn=30);
-        translate([-31.6,30.75,7]) rotate([0,0,0]) cylinder(r=0.2, h=100, $fn=30);
+        translate([-31.5,30.4,10]) rotate([-10,0,15]) cylinder(r=0.2, h=100);
+        translate([-31.6,30.75,7]) rotate([0,0,0]) cylinder(r=0.2, h=100);
     }
 
 
 module right_belt_cut()
 {
         // right belt cut
-        translate([-9.6,29.7,7]) cylinder(r=1.5, h=100, $fn=30);
+        translate([-9.6,29.7,7]) cylinder(r=1.5, h=100);
         translate([-11.1,19.8,7]) cube([2,10,30]);
         translate([22.5,25.5,7]) belt_cut();
         translate([66.65,1.95,0]) rotate([0,0,0])
@@ -451,8 +455,8 @@ module right_belt_cut()
             }
         }
         translate([2,14.6,7]) rotate([0,0,15]) cube([10,3,30]);
-        translate([-5.1,30,10]) rotate([-10,0,-15]) cylinder(r=0.2, h=100, $fn=30);
-        translate([-5,30.3,7]) rotate([0,0,0]) cylinder(r=0.2, h=100, $fn=30);
+        translate([-5.1,30,10]) rotate([-10,0,-15]) cylinder(r=0.2, h=100);
+        translate([-5,30.3,7]) rotate([0,0,0]) cylinder(r=0.2, h=100);
     }
 
 x_carriage();
