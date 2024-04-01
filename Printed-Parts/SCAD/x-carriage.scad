@@ -6,6 +6,7 @@
 // http://prusamendel.org
 
 use <bearing.scad>
+include <bosl2/std.scad>
 include <x-carriage-back.scad>
 include <scadlib/bearings.scad>
 
@@ -68,36 +69,36 @@ module x_carriage_base()
 
 
 
-module x_carriage_holes()
+module x_carriage_holes(bearing_dia)
 {
     // Small bearing holder holes cutter
-    translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_holes_nozip_smooth(1);
+    translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_holes_nozip_smooth(1, bearing_diameter=bearing_dia);
     translate([-4,-2.5,4]) rotate([0,0,90]) cube([5,25,2]);
 
     // Long bearing holder holes cutter
-    translate([-33/2,45,0]) rotate([0,0,90]) horizontal_bearing_holes_nozip_smooth(2);
+    translate([-33/2,45,0]) rotate([0,0,90]) horizontal_bearing_holes_nozip_smooth(2, bearing_diameter=bearing_dia);
     translate([8.5,45-2.5,4]) rotate([0,0,90]) cube([5,50,2]);
 
 
-    // upper ziptie right
-    translate([2,0,0])
-    difference()
-        {
-            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8, h=3.5);
-            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6);
-        }
+//    // upper ziptie right
+//    translate([2,0,0])
+//    difference()
+//        {
+//            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8, h=3.5);
+//            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6);
+//        }
 
-    // upper ziptie left
-    translate([-38,0,0])
-    difference()
-        {
-            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8,h=3.5);
-            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6);
-        }
+//    // upper ziptie left
+//    translate([-38,0,0])
+//    difference()
+//        {
+//            translate([0.75,45,12]) rotate([0,90,0]) cylinder(r=10.8,h=3.5);
+//            translate([0,45,12]) rotate([0,90,0]) cylinder(r=9, h=6);
+//        }
 
     // upper ziptie head
-    translate([0,52.5,12]) cube([10,10,5]);
-    translate([-45,52.5,12]) cube([13.5,10,5]);
+    //translate([0,52.5,12]) cube([10,10,5]);
+    //translate([-45,52.5,12]) cube([13.5,10,5]);
 
     // Extruder mounting holes
     translate([-7,15.5,-1])cylinder(r=1.65, h=20);
@@ -139,9 +140,6 @@ module x_carriage_fancy()
     translate([-37,-12,-6]) rotate([40,0,0]) cube([50,8,25]);
     translate([-35,-19.2,0]) rotate([0,0,45]) cube([6,6,16]);
     translate([2,-20.4,0]) rotate([0,0,45]) cube([6,6,16]);
-    translate([2,55.9,12]) rotate([0,0,45]) cube([6,6,16]);
-    translate([-33.5,55.9,12]) rotate([0,0,45]) cube([6,6,16]);
-
 }
 
 module cable_tray()
@@ -294,7 +292,7 @@ module final_cutout()
 }
 
 
-module x_carriage_block()
+module x_carriage_block(bearing_dia)
 {
     difference()
         {
@@ -303,7 +301,7 @@ module x_carriage_block()
                 difference()
                 {
                     x_carriage_base();
-                    x_carriage_holes();
+                    x_carriage_holes(bearing_dia);
                     x_carriage_fancy();
                 }
                 cable_tray();
@@ -312,13 +310,13 @@ module x_carriage_block()
         }
 }
 
-module x_carriage()
+module x_carriage(bearing_dia)
 {
 
     translate([16, -29, -15])
     difference()
     {
-            x_carriage_block();
+            x_carriage_block(bearing_dia);
 
             // upper motor screw
             translate([2.5,67.5,-50]) cylinder(r=1.8, h=100);
@@ -464,6 +462,18 @@ module right_belt_cut()
         translate([-5,30.3,7]) rotate([0,0,0]) cylinder(r=0.2, h=100);
     }
 
-//x_carriage();
-//x_carriage_back();
- bushing_lm8uu_drylin(cutout=true);
+carriage_w = 52;
+
+dims = bushing_lm8uu_drylin_dimensions();
+bearing_dia = dims[1];
+x_carriage(bearing_dia);
+x_carriage_back(bearing_dia);
+
+translate([0, 16, -3.4]) {
+    translate([carriage_w/2-1, 0, 0])
+    bushing_lm8uu_drylin(cutout=false, orient=RIGHT, anchor=TOP, $fn=64);
+
+    translate([-carriage_w/2+1, 0, 0])
+    bushing_lm8uu_drylin(cutout=false, orient=RIGHT, anchor=BOTTOM, $fn=64);
+}
+

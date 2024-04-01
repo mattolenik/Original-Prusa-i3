@@ -19,8 +19,9 @@ module m3head()
 
 
 
-module x_carriage_back()
+module x_carriage_back(bearing_dia=15)
 {
+    bearing_r = bearing_dia/2;
     translate([-1, -4, -15.1]) // Align to center around central screw head
     difference()
     {
@@ -41,8 +42,8 @@ module x_carriage_back()
         translate([-20,-19.5,9]) cube([50,7.5,10]);
 
         // bearings
-        translate([-15,-25,11.75]) rotate([0,90,0]) cylinder( h=31, r=7.5, $fn=150 );
-        translate([-30,20,11.75]) rotate([0,90,0]) cylinder( h=60, r=7.5, $fn=150 );
+        translate([-15,-25,11.75]) rotate([0,90,0]) cylinder( h=31, r=bearing_r, $fn=150 );
+        translate([-30,20,11.75]) rotate([0,90,0]) cylinder( h=60, r=bearing_r, $fn=150 );
         translate([-17,-25,11.75]) rotate([0,90,0]) cylinder( h=60, r=7, $fn=30 );
         translate([-32,20,11.75]) rotate([0,90,0]) cylinder( h=80, r=7, $fn=30 );
 
