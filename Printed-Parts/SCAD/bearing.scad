@@ -13,7 +13,7 @@ module horizontal_bearing_base(bearings=1){
     translate(v=[0,0,6]) cube(size = [24,8+bearings*25,12], center = true);
 }
 
-module horizontal_bearing_holes(bearings=1, bearing_diameter=BD){
+module horizontal_bearing_holes(bearings=1, bearing_diameter=BD, retainers=true){
     cutter_lenght = 10+bearings*25;
     one_holder_lenght = 8+25;
     holder_lenght = 8+bearings*25;
@@ -22,8 +22,10 @@ module horizontal_bearing_holes(bearings=1, bearing_diameter=BD){
     difference() {
         translate(v=[0,0,12]) rotate(a=[90,0,0]) translate(v=[0,0,-cutter_lenght/2]) cylinder(h = cutter_lenght, r=(bearing_diameter/2)+0.2, $fn=50);
         // Bearing retainers
-        translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
-        translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+        if (retainers) {
+            translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+            translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+        }
      }
 
  // Ziptie cutouts
@@ -41,7 +43,7 @@ module horizontal_bearing_holes(bearings=1, bearing_diameter=BD){
     }
 }
 
-module horizontal_bearing_holes_nozip(bearings=1, bearing_diameter=BD)
+module horizontal_bearing_holes_nozip(bearings=1, bearing_diameter=BD, retainers=true)
 {
     cutter_lenght = 10+bearings*25;
     one_holder_lenght = 8+25;
@@ -52,12 +54,14 @@ module horizontal_bearing_holes_nozip(bearings=1, bearing_diameter=BD)
     {
         translate(v=[0,0,12]) rotate(a=[90,0,0]) translate(v=[0,0,-cutter_lenght/2]) cylinder(h = cutter_lenght, r=(bearing_diameter/2)+0.2, $fn=50);
         // Bearing retainers
-        translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
-        translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+        if (retainers) {
+            translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+            translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+        }
     }
 }
 
-module horizontal_bearing_holes_nozip_smooth(bearings=1, bearing_diameter=BD)
+module horizontal_bearing_holes_nozip_smooth(bearings=1, bearing_diameter=BD, retainers=true)
 {
     cutter_lenght = 10+bearings*25;
     one_holder_lenght = 8+25;
@@ -68,12 +72,14 @@ module horizontal_bearing_holes_nozip_smooth(bearings=1, bearing_diameter=BD)
     {
         translate(v=[0,0,12]) rotate(a=[90,0,0]) translate(v=[0,0,-cutter_lenght/2]) cylinder(h = cutter_lenght, r=(bearing_diameter/2)+0.2, $fn=150);
         // Bearing retainers
-        translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
-        translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+        if (retainers) {
+            translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+            translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+        }
     }
 }
 
-module horizontal_bearing_holes_smooth_nozip(bearings=1, bearing_diameter=BD)
+module horizontal_bearing_holes_smooth_nozip(bearings=1, bearing_diameter=BD, retainers=true)
 {
     cutter_lenght = 10+bearings*25;
     one_holder_lenght = 8+25;
@@ -84,8 +90,10 @@ module horizontal_bearing_holes_smooth_nozip(bearings=1, bearing_diameter=BD)
      {
          translate(v=[0,0,12]) rotate(a=[90,0,0]) translate(v=[0,0,-cutter_lenght/2]) cylinder(h = cutter_lenght, r=(bearing_diameter/2)+0.2, $fn=120);
          // Bearing retainers
-         translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
-         translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+         if (retainers) {
+             translate(v=[0,1-holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+             translate(v=[0,-1+holder_lenght/2,3]) cube(size = [24,6,8], center = true);
+         }
      }
 }
 
