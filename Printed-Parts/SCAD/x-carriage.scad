@@ -466,4 +466,4 @@ module right_belt_cut()
 
 //x_carriage();
 //x_carriage_back();
- bushing_lm8uu_drylin() show_anchors();
+ bushing_lm8uu_drylin(cutout=true);
