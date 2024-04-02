@@ -42,13 +42,13 @@ module x_carriage_back(bearing_dia=15)
         translate([-20,-19.5,9]) cube([50,7.5,10]);
 
         // bearings
-        translate([-15,-25,11.75]) rotate([0,90,0]) cylinder( h=31, r=bearing_r, $fn=150 );
-        translate([-30,20,11.75]) rotate([0,90,0]) cylinder( h=60, r=bearing_r, $fn=150 );
-        translate([-17,-25,11.75]) rotate([0,90,0]) cylinder( h=60, r=7, $fn=30 );
-        translate([-32,20,11.75]) rotate([0,90,0]) cylinder( h=80, r=7, $fn=30 );
+        //translate([-15,-25,11.75]) rotate([0,90,0]) cylinder( h=31, r=bearing_r, $fn=150 );
+        //translate([-30,20,11.75]) rotate([0,90,0]) cylinder( h=60, r=bearing_r, $fn=150 );
+        //translate([-17,-25,11.75]) rotate([0,90,0]) cylinder( h=60, r=7, $fn=30 );
+        //translate([-32,20,11.75]) rotate([0,90,0]) cylinder( h=80, r=7, $fn=30 );
 
-        translate([-15,-25-2,18]) cube([30,4,2]);
-        translate([-30,20-2,18]) cube([60,4,2]);
+        //translate([-15,-25-2,18]) cube([30,4,2]);
+        //translate([-30,20-2,18]) cube([60,4,2]);
 
 
         // hold together screws
@@ -110,8 +110,8 @@ module x_carriage_back(bearing_dia=15)
         // nice edges
         translate([-20.8,-47.1,10]) rotate([0,0,45]) cube([10,10,15]);
         translate([21.8,-47.1,10]) rotate([0,0,45]) cube([10,10,15]);
-        translate([-24.4,15.2,10]) rotate([0,0,45]) cube([14,10,15]);
-        translate([26.9,15.2,10]) rotate([0,0,45]) cube([10,14,15]);
+        //translate([-24.4,15.2,10]) rotate([0,0,45]) cube([14,10,15]);
+        //translate([26.9,15.2,10]) rotate([0,0,45]) cube([10,14,15]);
         translate([-19.55,28,10]) rotate([0,0,45]) cube([10,10,15]);
         translate([22.05,28,10]) rotate([0,0,45]) cube([10,10,15]);
         translate([-22,35,21]) rotate([30,0,0]) cube([44,10,10]);
@@ -135,23 +135,6 @@ module x_carriage_back(bearing_dia=15)
         // inner cable cleanup
         translate([-1,-19.5,14]) rotate([0,30,0]) cube([10,7.5,10]);
         translate([-5,-19.5,10]) rotate([0,-30,0]) cube([10,7.5,10]);
-
-
-        // upper ziptie left
-        translate([-21.5,-25,0])difference()
-        {
-            translate([1,45,12]) rotate([0,90,0]) cylinder(r=8.5, h=4, $fn=25);
-            translate([0,45,12]) rotate([0,90,0]) cylinder(r=7, h=6, $fn=25);
-        }
-        translate([19.5,8,14.5]) rotate([-60,0,0]) cube([4,3,10]);
-        translate([-20.5,8,14.5]) rotate([-60,0,0]) cube([4,3,10]);
-
-        // upper ziptie right
-        translate([19,-25,0])difference()
-        {
-        translate([0.5,45,12]) rotate([0,90,0]) cylinder(r=8.5, h=4, $fn=25);
-        translate([0,45,12]) rotate([0,90,0]) cylinder(r=7, h=6, $fn=25);
-        }
 
         // supports
         translate([-17,26,5]) m3head();
