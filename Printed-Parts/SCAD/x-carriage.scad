@@ -72,14 +72,6 @@ module x_carriage_base()
 
 module x_carriage_holes(bearing_dia)
 {
-    // Small bearing holder holes cutter
-    //translate([-33/2,0,0]) rotate([0,0,90]) horizontal_bearing_holes_nozip_smooth(1, bearing_diameter=bearing_dia, retainers=false);
-    //translate([-4,-2.5,4]) rotate([0,0,90]) cube([5,25,2]);
-
-    // Long bearing holder holes cutter
-    //translate([-33/2,45,0]) rotate([0,0,90]) horizontal_bearing_holes_nozip_smooth(2, bearing_diameter=bearing_dia, retainers=false);
-    //translate([8.5,45-2.5,4]) rotate([0,0,90]) cube([5,50,2]);
-
     // Extruder mounting holes
     translate([-7,15.5,-1])cylinder(r=1.65, h=20);
     translate([-27,15.5,-1])cylinder(r=1.65, h=20);
@@ -106,9 +98,6 @@ module x_carriage_fancy()
     translate([12,65.3,-1]) rotate([0,0,45]) cube([10,10,20]);
     translate([4.9,72.38,-1]) cube([10,10,20]);
 
-    // Top left corner
-    translate([-33-13.5,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,20]);
-
     translate([-35,93,5]) rotate([35,0,0]) translate([0,-15,0]) cube([55,15,15]);
     translate([7.5,59.5,-18]) rotate([0,0,0]) cube([20,20,40]);
 
@@ -116,6 +105,12 @@ module x_carriage_fancy()
     translate([-37,-12,-6]) rotate([40,0,0]) cube([50,8,25]);
     translate([-35,-19.2,0]) rotate([0,0,45]) cube([6,6,16]);
     translate([2,-20.4,0]) rotate([0,0,45]) cube([6,6,16]);
+}
+
+module common_cutouts() {
+    // Top left corner
+    translate([16, -29, -15])
+    translate([-33-13.5,-5,0]) translate([0,45+11.5,-1]) rotate([0,0,135]) translate([0,-15,0]) cube([30,30,50]);
 }
 
 module cable_tray()
@@ -429,6 +424,8 @@ carriage_w = 52;
 
 dims = bushing_lm8uu_drylin_dimensions();
 bearing_dia = dims[1];
+bearing_cutout_dia = bearing_dia - 4;
+
 draw_bearings = true;
 
 front = true;
@@ -439,38 +436,21 @@ shaft_z = -3;
 difference() {
     union() {
         if(front) x_carriage(bearing_dia);
-        if(back) difference() {
-            recolor([0, 0, 0.7, 0.1]) x_carriage_back(bearing_dia);
-            translate([0, 16, -3.35]) {
-                translate([carriage_w/2-2, 0, 0])
-                    cyl(d=bearing_dia, h=3, orient=LEFT, anchor=TOP, $fn=$fn);
-                translate([-carriage_w/2-2, 0, 0])
-                    cyl(d=bearing_dia, h=3, orient=LEFT, anchor=TOP, $fn=$fn);
-            }
-            translate([0, 20.5, 1.7]) {
-                translate([-carriage_w/2, 0, 0])
-                    cuboid([2, 2, 2], anchor=CENTER);
-                translate([carriage_w/2, 0, 0])
-                    cuboid([2, 2, 2], anchor=CENTER);
-            }
-        }
+        if(back) recolor([0, 0, 0.7, 0.1]) x_carriage_back(bearing_dia);
     }
     translate([0, 16, shaft_z]) {
-        translate([carriage_w/2-1, 0, 0])
+        translate([carriage_w/2-2, 0, 0])
             bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=TOP);
 
-        translate([-carriage_w/2, 0, 0])
+        translate([-carriage_w/2+1, 0, 0])
             bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=BOTTOM);
 
-        // Hollow out middle space between bearings
-        cyl(d=bearing_dia, h=6, orient=RIGHT, anchor=CENTER);
+        cyl(d=bearing_cutout_dia, h=60, orient=RIGHT, anchor=CENTER);
     }
     translate([0, -29, shaft_z]) {
         bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=CENTER);
-        translate([13.5, 0, 0])
-        cyl(d=bearing_dia, h=6, orient=RIGHT, anchor=CENTER);
-        translate([-14.5, 0, 0])
-        cyl(d=bearing_dia, h=6, orient=RIGHT, anchor=CENTER);
+        cyl(d=bearing_cutout_dia, h=60, orient=RIGHT, anchor=CENTER);
     }
+    common_cutouts();
 }
 

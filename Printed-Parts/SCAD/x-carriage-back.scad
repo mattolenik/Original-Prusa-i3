@@ -112,25 +112,28 @@ module x_carriage_back(bearing_dia=15)
         translate([21.8,-47.1,10]) rotate([0,0,45]) cube([10,10,15]);
         //translate([-24.4,15.2,10]) rotate([0,0,45]) cube([14,10,15]);
         //translate([26.9,15.2,10]) rotate([0,0,45]) cube([10,14,15]);
-        translate([-19.55,28,10]) rotate([0,0,45]) cube([10,10,15]);
-        translate([22.05,28,10]) rotate([0,0,45]) cube([10,10,15]);
+        //translate([-19.55,28,10]) rotate([0,0,45]) cube([10,10,15]);
+        //translate([22.05,28,10]) rotate([0,0,45]) cube([10,10,15]);
         translate([-22,35,21]) rotate([30,0,0]) cube([44,10,10]);
-        translate([-22,35,17]) rotate([30,0,0]) cube([14.5,10,10]);
-        translate([10,35,17]) rotate([30,0,0]) cube([14.5,10,10]);
+
+        translate([-26,35,17]) rotate([30,0,0]) cube([18.5,10,10]);
+        translate([10,35,17]) rotate([30,0,0]) cube([17.5,10,10]);
 
         translate([-20.8,-40.5,16]) rotate([50,0,0]) cube([50,20,10]);
 
         // upper side cuts
-        translate([17,25,10]) rotate([0,0,0]) cube([10,10,15]);
-        translate([-29.5,25,10]) rotate([0,0,0]) cube([15,15,15]);
-        translate([17,22,13]) rotate([0,0,0]) cube([10,10,5]);
-        translate([-24.5,22,13]) rotate([0,0,0]) cube([10,10,5]);
+        //translate([17,25,10]) rotate([0,0,0]) cube([10,10,15]);
+        //translate([-29.5,25,10]) rotate([0,0,0]) cube([15,15,15]);
+        //translate([17,22,13]) rotate([0,0,0]) cube([10,10,5]);
+        //translate([-24.5,22,13]) rotate([0,0,0]) cube([10,10,5]);
 
-        // side edges
-        translate([27,-20,16]) rotate([0,-30,0]) cube([10,50,10]);
-        translate([-34.2,-20,21]) rotate([0,30,0]) cube([10,50,10]);
-        translate([19.5,-50,16]) rotate([0,-30,0]) cube([10,50,10]);
+        //// side edges
+        // Top half
+        translate([28.5,-15,16]) rotate([0,-30,0]) cube([10,50,10]);
+        translate([-36.2,-15,21]) rotate([0,30,0]) cube([10,50,10]);
+        // Bottom half
         translate([-27.1,-50,21]) rotate([0,30,0]) cube([10,50,10]);
+        translate([19.5,-50,16]) rotate([0,-30,0]) cube([10,50,10]);
 
         // inner cable cleanup
         translate([-1,-19.5,14]) rotate([0,30,0]) cube([10,7.5,10]);
