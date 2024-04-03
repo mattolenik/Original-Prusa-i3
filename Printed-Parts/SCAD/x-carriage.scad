@@ -441,6 +441,10 @@ difference() {
                 translate([carriage_w/2, 0, 0])
                 cuboid([5, bearing_cutout_dia, bearing_cutout_dia/2], anchor=CENTER+BOTTOM);
             }
+            translate([-carriage_w/2+10, -29, shaft_z])
+            cuboid([10, bearing_cutout_dia, bearing_cutout_dia/2], anchor=CENTER+BOTTOM);
+            translate([carriage_w/2-10, -29, shaft_z])
+            cuboid([10, bearing_cutout_dia, bearing_cutout_dia/2], anchor=CENTER+BOTTOM);
         }
         if(back) recolor([0, 0, 0.7, 0.1]) x_carriage_back(bearing_dia);
     }
