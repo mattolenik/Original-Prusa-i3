@@ -10,7 +10,7 @@ use <polyholes.scad>
 BD = 14.90;
 
 module horizontal_bearing_base(bearings=1){
-    translate(v=[0,0,6]) cube(size = [24,8+bearings*25,12], center = true);
+    translate(v=[0,0,7.5]) cube(size = [24,8+bearings*25,15], center = true);
 }
 
 module horizontal_bearing_holes(bearings=1, bearing_diameter=BD, retainers=true){

@@ -11,7 +11,7 @@ include <x-carriage-back.scad>
 include <scadlib/bearings.scad>
 include <scadlib/std.scad>
 
-draft = true;
+draft = false;
 $fn = draft ? 32 : 128;
 
 module belt_cut()
@@ -426,8 +426,6 @@ dims = bushing_lm8uu_drylin_dimensions();
 bearing_dia = dims[1];
 bearing_cutout_dia = bearing_dia - 4;
 
-draw_bearings = true;
-
 front = true;
 back = true;
 
@@ -435,20 +433,28 @@ shaft_z = -3;
 
 difference() {
     union() {
-        if(front) x_carriage(bearing_dia);
+        if(front) down(0.1) difference() {
+            x_carriage(bearing_dia);
+            translate([0, 16, shaft_z]) {
+                translate([-carriage_w/2, 0, 0])
+                cuboid([5, bearing_cutout_dia, bearing_cutout_dia/2], anchor=CENTER+BOTTOM);
+                translate([carriage_w/2, 0, 0])
+                cuboid([5, bearing_cutout_dia, bearing_cutout_dia/2], anchor=CENTER+BOTTOM);
+            }
+        }
         if(back) recolor([0, 0, 0.7, 0.1]) x_carriage_back(bearing_dia);
     }
     translate([0, 16, shaft_z]) {
         translate([carriage_w/2-2, 0, 0])
-            bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=TOP);
+            hull() bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=TOP);
 
         translate([-carriage_w/2+1, 0, 0])
-            bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=BOTTOM);
+            hull() bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=BOTTOM);
 
         cyl(d=bearing_cutout_dia, h=60, orient=RIGHT, anchor=CENTER);
     }
     translate([0, -29, shaft_z]) {
-        bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=CENTER);
+        hull() bushing_lm8uu_drylin(cutout=true, orient=RIGHT, anchor=CENTER);
         cyl(d=bearing_cutout_dia, h=60, orient=RIGHT, anchor=CENTER);
     }
     common_cutouts();
