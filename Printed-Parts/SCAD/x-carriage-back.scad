@@ -33,7 +33,7 @@ module x_carriage_back(bearing_dia=15)
         }
 
         // lower bearing cut
-        translate([-17,-22,7.5]) cube([35,4,10]);
+        translate([-17,-25,7.5]) cube([35,6,10]);
 
         // cables opening
         translate([-4.5,-18,15]) cube([10,4,10]);

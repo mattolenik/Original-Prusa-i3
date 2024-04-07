@@ -426,7 +426,7 @@ dims = bushing_lm8uu_drylin_dimensions();
 bearing_dia = dims[1];
 bearing_cutout_dia = bearing_dia - 4;
 
-front = true;
+front = false;
 back = true;
 
 shaft_z = -3;
