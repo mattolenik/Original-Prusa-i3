@@ -11,8 +11,7 @@ include <x-carriage-back.scad>
 include <scadlib/bearings.scad>
 include <scadlib/std.scad>
 
-draft = false;
-$fn = draft ? 32 : 128;
+$fn = 128;
 
 module belt_cut()
 {
@@ -360,7 +359,7 @@ module x_carriage(bearing_dia)
 
         //version
         translate([-12,-2,0.5]) rotate([0,180,0]) linear_extrude(height = 0.6)
-        { text("R7+",font = "helvetica:style=Bold", size=5); }
+        { text("R7y",font = "helvetica:style=Bold", size=5); }
     }
 }
 
@@ -446,7 +445,7 @@ difference() {
             translate([carriage_w/2-10, -29, shaft_z])
             cuboid([10, bearing_cutout_dia, bearing_cutout_dia/2], anchor=CENTER+BOTTOM);
         }
-        if(back) recolor([0, 0, 0.7, 0.1]) x_carriage_back(bearing_dia);
+        if(back) x_carriage_back(bearing_dia);
     }
     translate([0, 16, shaft_z]) {
         translate([carriage_w/2-2, 0, 0])

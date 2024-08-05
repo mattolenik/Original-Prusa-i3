@@ -10,19 +10,27 @@ module m3head()
 {
     intersection()
     {
-        translate([30,5,9])cylinder(r=3.1,h = 25, $fn=30); // head cut
+        translate([30,5,9])cylinder(r=3.1,h = 25); // head cut
         translate([30,5,17-3.5]) cube([6.2,3.4,1], center=true);
     }
     translate([30,5,17-4]) cube([3.4,3.4,1], center=true);
-    translate([30,5,17-3.5])cylinder(r=3.1,h = 20, $fn=30); // head cut
+    translate([30,5,17-3.5])cylinder(r=3.1,h = 20); // head cut
 }
 
 
 
 module x_carriage_back(bearing_dia=15)
 {
+    t=1;
+    edge=1;
+    l=20.55;
+    w=16.15;
+    h=2;
+    offset=[20,-26,23.1];
     bearing_r = bearing_dia/2;
     translate([-1, -4, -15.1]) // Align to center around central screw head
+    difference() {
+    union() {
     difference()
     {
         union()
@@ -37,15 +45,15 @@ module x_carriage_back(bearing_dia=15)
 
         // cables opening
         translate([-4.5,-18,15]) cube([10,4,10]);
-        translate([0.5,-18,10]) rotate([0,0,90]) cylinder( h=32, r=5, $fn=30 );
-        translate([0.5,-14,10]) rotate([0,0,90]) cylinder( h=32, r=5, $fn=30 );
+        translate([0.5,-18,10]) rotate([0,0,90]) cylinder( h=32, r=5 );
+        translate([0.5,-14,10]) rotate([0,0,90]) cylinder( h=32, r=5 );
         translate([-20,-19.5,9]) cube([50,7.5,10]);
 
         // bearings
         //translate([-15,-25,11.75]) rotate([0,90,0]) cylinder( h=31, r=bearing_r, $fn=150 );
         //translate([-30,20,11.75]) rotate([0,90,0]) cylinder( h=60, r=bearing_r, $fn=150 );
-        //translate([-17,-25,11.75]) rotate([0,90,0]) cylinder( h=60, r=7, $fn=30 );
-        //translate([-32,20,11.75]) rotate([0,90,0]) cylinder( h=80, r=7, $fn=30 );
+        //translate([-17,-25,11.75]) rotate([0,90,0]) cylinder( h=60, r=7 );
+        //translate([-32,20,11.75]) rotate([0,90,0]) cylinder( h=80, r=7 );
 
         //translate([-15,-25-2,18]) cube([30,4,2]);
         //translate([-30,20-2,18]) cube([60,4,2]);
@@ -56,36 +64,36 @@ module x_carriage_back(bearing_dia=15)
         translate([1,4,10]) rotate([0,0,0]) cylinder( h=50, r=1.65, $fn=50 );
         translate([13,31,10]) rotate([0,0,0]) cylinder( h=50, r=1.65, $fn=50 );
         translate([-10.5,31,10]) rotate([0,0,0]) cylinder( h=50, r=1.65, $fn=50 );
-        translate([13,31,19]) cylinder( h=50, r=3.1, $fn=30 );
-        translate([-10.5,31,19]) cylinder( h=50, r=3.1, $fn=30 );
+        translate([13,31,19]) cylinder( h=50, r=3.1 );
+        translate([-10.5,31,19]) cylinder( h=50, r=3.1 );
 
         // lower screw heads
-        translate([-5,-36,19]) cylinder( h=6, r=3.1, $fn=30 );
+        translate([-5,-36,19]) cylinder( h=6, r=3.1 );
         translate([-8.1,-46,18]) cube([6.2,10,10]);
 
 
         // center screw head
-        translate([1,4,18]) cylinder( h=7, r=3.1, $fn=30 );
+        translate([1,4,18]) cylinder( h=7, r=3.1 );
 
         // heat cables cut
         translate([10.15,-37,4]) rotate([0,-20,0])
         union()
             {
-            cylinder(r=3, h=40, $fn=30);
+            cylinder(r=3, h=40);
             translate([-3,-10,0])cube([6,10,40]);
             }
         translate([5.85,-37,4]) rotate([0,-10,0])
         union()
             {
-            cylinder(r=3, h=40, $fn=30);
+            cylinder(r=3, h=40);
             translate([-3,-10,0])cube([6,10,40]);
             }
         // cable holder screw
-        translate([0.5,-27,11]) rotate([0,0,90]) cylinder( h=40, r=1.6, $fn=30 );
+        translate([0.5,-27,11]) rotate([0,0,90]) cylinder( h=40, r=1.6 );
         translate([0.5,-27,16.75]) rotate([0,0,0]) cylinder( h=5, r=3.1, $fn=6 );
 
         // x-carriage screws in belt holders
-        translate([-11.5,-0.5,10]) rotate([0,0,90]) cylinder( h=40, r=3, $fn=30 );
+        translate([-11.5,-0.5,10]) rotate([0,0,90]) cylinder( h=40, r=3 );
 
         difference()
         {
@@ -153,10 +161,13 @@ module x_carriage_back(bearing_dia=15)
         translate([5,-8,16]) cube([0.5,20,6.5]);
         translate([-3.25,-8,16]) cube([0.5,20,6.5]);
         translate([0.75,-8,16]) cube([0.5,7,6.5]);
-
-                                // version
-        translate([-12,-29,22.6]) rotate([0,0,0]) linear_extrude(height = 0.6)
-        { text("R7+",font = "helvetica:style=Bold", size=4); }
+}
+        translate(offset)
+            #cuboid([l+edge, w+edge, h], anchor=TOP);
+    }
+    // accelerometer mount
+    translate(offset)
+        #cuboid([l-edge, w-edge, t], anchor=TOP);
     }
 }
 
